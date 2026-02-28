@@ -66,7 +66,6 @@ git clone https://github.com/handycn/Llama-Flex-Server.git
 cd Llama-Flex-Server
 chmod +x start_flex.macos.command
 ./start_flex.macos.command
-
 ```
 
 ### Windows (PowerShell)
@@ -129,6 +128,7 @@ pip install open-webui
 ## 📋 配置文件
 
 macOS 用户：复制 config.macos.example.json 为 config.json
+
 Windows 用户：复制 config.windows.example.json 为 config.json
 
 复制配置文件模板并编辑 `path`：
