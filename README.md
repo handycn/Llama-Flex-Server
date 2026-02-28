@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/Windows-supported-brightgreen?style=flat-square" alt="Windows">
   <img src="https://img.shields.io/badge/macOS-supported-brightgreen?style=flat-square" alt="macOS">
   <img src="https://img.shields.io/badge/license-MIT-orange?style=flat-square" alt="License">
-  <a href="https://github.com/handycn/flex-server"><img src="https://img.shields.io/github/stars/handycn/flex-server?style=social" alt="Stars"></a>
+  <a href="https://github.com/handycn/flex-server"></a>
 </p>
 
 <p align="center">
@@ -16,9 +16,9 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/demo.png" alt="Demo Screenshot" width="800">
+  <img src="docs/截屏2026-02-28 17.16.49.png" alt="Demo Screenshot" width="800">
   <br>
-  <em>（终端性能监控 + Open WebUI 对话界面）</em>
+  <em>（mac终端性能监控）</em>
 </p>
 
 ---
@@ -158,12 +158,38 @@ pip install open-webui
 ## 🧠 高级功能
 
 ### 自动记忆注入
+<p align="center">
+  <img src="docs/截屏2026-02-28 18.00.54.png" alt="Demo Screenshot" width="600">
+  <br>
+  <em>（函数添加位置）</em>
+</p>
+
 项目包含 `auto_memory_filter.py`，可自动从 `memory.md` 读取长期记忆并注入系统提示词。
 
 * **使用方法：** 在 Open WebUI 「工作空间」→「函数」中导入该文件，并将 `self.memory_file` 指向你的 `memory.md` 路径。
+<p align="center">
+  <img src="docs/截屏2026-02-28 17.59.49.png" alt="Demo Screenshot" width="600">
+  <br>
+  <em>（模型设置memory按钮）</em>
+</p>
+---
+### Google Drive 集成
 
-### Google Drive 集成（Open WebUI）
-启动脚本中已预置环境变量位：
+若需要使用 Open WebUI 的 Google Drive 附件功能，在启动脚本中配置：
+
+```bash
+export ENABLE_GOOGLE_DRIVE_INTEGRATION="true"
+export GOOGLE_DRIVE_CLIENT_ID="你的client_id"
+export GOOGLE_DRIVE_API_KEY="你的api_key"
+```
+<p align="center">
+  <img src="docs/截屏2026-02-28 17.55.16.png" alt="Demo 1" width="400">
+  <img src="docs/截屏2026-02-28 17.54.42.png" alt="Demo 2" width="400">
+  <br>
+  <em>（截图：google dirve按钮、文档选择）</em>
+</p>
+
+---
 
 ### 多模型并发调用
 服务器支持通过 `model_lock` 实现请求排队，避免多个模型请求导致显存冲突。
