@@ -50,7 +50,7 @@
 
 ---
 
-## 🚀 快速开始（30秒启动）
+## 🚀 快速开始
 
 ### 前置要求
 * Python 3.10+
@@ -76,7 +76,7 @@ cd flex-server
 
 ---
 
-## 📦 安装与配置
+## 📦 完整安装与配置
 
 ### 1. 创建虚拟环境（推荐）
 ```bash
@@ -127,9 +127,11 @@ pip install fastapi uvicorn
 ```bash
 pip install open-webui
 ```
+---
 
-### 6. 配置模型
-配置 `config.json`：**
+## ⚙️ 配置文件说明
+
+复制配置文件模板 `config.json.example` 并编辑：
 复制模板并编辑路径：
 ```json
 {
