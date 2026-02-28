@@ -157,13 +157,15 @@ pip install open-webui
 
 ## 🧠 高级功能
 
-### 1. 自动记忆注入
+### 自动记忆注入
 项目包含 `auto_memory_filter.py`，可自动从 `memory.md` 读取长期记忆并注入系统提示词。
 
 * **使用方法：** 在 Open WebUI 「工作空间」→「函数」中导入该文件，并将 `self.memory_file` 指向你的 `memory.md` 路径。
 
+### Google Drive 集成（Open WebUI）
+启动脚本中已预置环境变量位：
 
-### 2. 多模型并发调用
+### 多模型并发调用
 服务器支持通过 `model_lock` 实现请求排队，避免多个模型请求导致显存冲突。
 
 ---
