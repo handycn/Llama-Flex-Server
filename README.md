@@ -33,7 +33,7 @@
 - [📋 配置文件](#-配置文件)
 - [🧠 高级功能](#-高级功能)
 - [📊 性能监控与显存管理](#-性能监控与显存管理)
-- [🔧 一键启动脚本](#-一键启动脚本)
+- [🔧 项目文件说明](#-项目文件说明)
 - [🐞 常见问题排查](#-常见问题排查)
 
 ---
@@ -164,15 +164,16 @@ pip install open-webui
 ## 🧠 高级功能
 
 ### 💾 自动记忆注入
+auto_memory_filter.py 需要在 Open WebUI 的 Workspace → Functions 中导入
+
+配合 memory.md 使用，可实现跨会话的长期记忆
+
+* **使用方法：** 在 Open WebUI 「工作空间」→「函数」中导入该文件，并将 `self.memory_file` 指向你的 `memory.md` 路径。
 <p align="center">
   <img src="docs/截屏2026-02-28 18.00.54.png" alt="Demo Screenshot" width="600">
   <br>
   <em>（函数添加位置）</em>
 </p>
-
-项目包含 `auto_memory_filter.py`，可自动从 `memory.md` 读取长期记忆并注入系统提示词。
-
-* **使用方法：** 在 Open WebUI 「工作空间」→「函数」中导入该文件，并将 `self.memory_file` 指向你的 `memory.md` 路径。
 <p align="center">
   <img src="docs/截屏2026-02-28 17.59.49.png" alt="Demo Screenshot" width="600">
   <br>
@@ -253,13 +254,29 @@ UNLOAD_DELAY = 30  # 单位：秒，可根据需求调整
 - **等待倒计时**：让系统自动完成卸载（终端显示 `[系统] 已超过 30s 未使用，自动卸载模型释放内存...`）
 ---
 
-## 🔧 一键启动脚本
+## 🔧 项目文件说明
 
-| 脚本 | 平台 | 说明 |
-| :--- | :--- | :--- |
-| `start_flex.sh` | macOS/Linux | 日志输出到当前终端 |
-| `start_win.ps1` | Windows | 推荐脚本，PowerShell 分屏显示日志 |
-| `start_win.bat` | Windows | 传统批处理，兼容旧系统 |
+| 文件名 | 说明 |
+|--------|------|
+| `flex_server.py` | 核心后端服务，基于 `llama-cpp-python` 的 OpenAI 兼容 API 服务器，支持流式输出、自动显存卸载、多模型切换 |
+| `config.macos.example.json` | macOS 配置示例，复制为 `config.json` 并修改模型路径后使用 |
+| `config.windows.example.json` | Windows 配置示例，复制为 `config.json` 并修改模型路径后使用 |
+| `start_flex.macos.command` | macOS 一键启动脚本（双击运行），同时启动后端 + Open WebUI，支持实时日志显示 |
+| `start_windows.bat` | Windows 一键启动脚本，自动检测 Windows Terminal 并分屏启动前后端 |
+| `auto_memory_filter.py` | Open WebUI 函数插件，自动从本地 `memory.md` 读取长期记忆并注入系统提示词 |
+| `memory.md` | 长期记忆文件示例（需复制为 `memory.md` 并修改内容） |
+| `LICENSE` | MIT 开源许可证 |
+| `docs/` | 文档目录（包含截图等资源） |
+
+### 📌 补充说明（可选，放 README 末尾）
+配置文件
+config.macos.example.json 和 config.windows.example.json 是平台独立的，主要区别在于路径格式示例
+使用时请复制为 config.json 并根据你的实际模型路径修改
+
+启动脚本
+macOS：start_flex.macos.command 双击即可运行，日志实时显示在终端
+Windows：start_windows.bat 双击运行，自动检测 Windows Terminal，支持分屏显示
+
 ---
 
 ## 🐞 常见问题排查
