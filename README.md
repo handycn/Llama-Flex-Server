@@ -100,25 +100,16 @@ cd Llama-Flex-Server
 ```
 
 ### 3. 安装 llama-cpp-python（核心引擎）
-具体的后端说明，请参阅此处：https://github.com/JamePeng/llama-cpp-python
 
-根据您的硬件选择一种方式：
+本项目的后端基于 [JamePeng/llama-cpp-python](https://github.com/JamePeng/llama-cpp-python) 分支开发，请前往该仓库查看详细的安装说明：
 
-**选项A：CPU 版本（通用）**
-```bash
-pip install llama-cpp-python
-```
+👉 [JamePeng/llama-cpp-python 安装指南](https://github.com/JamePeng/llama-cpp-python#installation)
 
-**选项B：GPU 加速（NVIDIA CUDA）- 推荐**
-```bash
-# 请前往 https://github.com/JamePeng/llama-cpp-python/releases
-# 下载适合你系统的 .whl 文件，然后本地安装：
-pip install /path/to/downloaded/file.whl
-```
+根据你的硬件选择对应的安装方式：
 
-**选项C：Mac Metal 加速（Apple Silicon）**
-```bash
-CMAKE_ARGS="-DGGML_METAL=on" pip install llama-cpp-python
+- **Windows with NVIDIA GPU**：下载 Releases 页面中的 CUDA 版本 whl
+- **macOS with Apple Silicon**：下载 Releases 页面中的 Metal 版本 whl
+- **CPU only / 其他情况**：参考仓库说明从源码编译
 ```
 
 ### 4. 安装 API 服务依赖
