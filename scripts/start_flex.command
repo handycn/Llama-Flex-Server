@@ -26,8 +26,8 @@ export OLLAMA_BASE_URL=""
 
 # Google Drive 集成配置（请替换为你的实际凭据）
 export ENABLE_GOOGLE_DRIVE_INTEGRATION="true"
-export GOOGLE_DRIVE_CLIENT_ID="603733063667-lg5ch5i94jm2okj6341es8kmqr32omfl.apps.googleusercontent.com"
-export GOOGLE_DRIVE_API_KEY="AIzaSyAoPGUPbAHA9BUSokvcj-pXanm3JZCdGdk"
+export GOOGLE_DRIVE_CLIENT_ID="请替换为你的实际 Client ID"
+export GOOGLE_DRIVE_API_KEY="请替换为你的实际 API Key"
 
 echo -e "\033[32m[前端]\033[0m 正在启动..."
 open-webui serve >/dev/null 2>&1 &
