@@ -62,17 +62,18 @@
 
 ### macOS / Linux
 ```bash
-git clone [https://github.com/handycn/flex-server.git](https://github.com/handycn/flex-server.git)
-cd flex-server
-chmod +x scripts/start_flex.sh
-./scripts/start_flex.sh
+git clone https://github.com/handycn/Llama-Flex-Server.git
+cd Llama-Flex-Server
+chmod +x start_flex.macos.command
+./start_flex.macos.command
+
 ```
 
 ### Windows (PowerShell)
 ```powershell
-git clone [https://github.com/handycn/flex-server.git](https://github.com/handycn/flex-server.git)
-cd flex-server
-.\scripts\start_win.ps1
+git clone https://github.com/handycn/Llama-Flex-Server.git
+cd Llama-Flex-Server
+start_windows.bat
 ```
 
 🎉 启动后，访问 **http://localhost:8080** 即可开始对话！
@@ -110,7 +111,9 @@ pip install llama-cpp-python
 
 **选项B：GPU 加速（NVIDIA CUDA）- 推荐**
 ```bash
-pip install llama-cpp-python --extra-index-url https://github.com/JamePeng/llama-cpp-python/releases
+# 请前往 https://github.com/JamePeng/llama-cpp-python/releases
+# 下载适合你系统的 .whl 文件，然后本地安装：
+pip install /path/to/downloaded/file.whl
 ```
 
 **选项C：Mac Metal 加速（Apple Silicon）**
@@ -134,9 +137,10 @@ pip install open-webui
 
 ## 📋 配置文件
 
-复制配置文件模板 `config.json.example` 并编辑：`path`
+macOS 用户：复制 config.macos.example.json 为 config.json
+Windows 用户：复制 config.windows.example.json 为 config.json
 
-复制模板并编辑路径：
+复制配置文件模板并编辑 `path`：
 ```json
 {
   "models": [
