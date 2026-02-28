@@ -1,0 +1,18 @@
+{
+  "models": [
+    {
+      "name": "qwen3-vl-8b",
+      "path": "/path/to/your/model.gguf",
+      "mmproj_path": "/path/to/your/model.mmproj.gguf",
+      "n_ctx": 4096,
+      "n_gpu_layers": -1
+    },
+    {
+      "name": "qwen3-8b",
+      "path": "/path/to/your/model.gguf",
+      "mmproj_path": null,
+      "n_ctx": 4096,
+      "n_gpu_layers": -1
+    }
+  ]
+}
