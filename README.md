@@ -106,7 +106,7 @@ cd Llama-Flex-Server
 👉 [JamePeng/llama-cpp-python 安装指南](https://github.com/JamePeng/llama-cpp-python#installation)
 
 根据你的硬件选择对应的安装方式：
-
+```
 - **Windows with NVIDIA GPU**：下载 Releases 页面中的 CUDA 版本 whl
 - **macOS with Apple Silicon**：下载 Releases 页面中的 Metal 版本 whl
 - **CPU only / 其他情况**：参考仓库说明从源码编译
