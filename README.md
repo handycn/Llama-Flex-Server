@@ -8,7 +8,9 @@
   <img src="https://img.shields.io/badge/license-MIT-orange?style=flat-square" alt="License">
   <a href="https://github.com/handycn/flex-server"></a>
 </p>
-
+<p align="center">
+  <a href="README-EN.md"><img src="https://img.shields.io/badge/English-README-blue?style=for-the-badge" alt="English"></a>
+</p>
 <p align="center">
   <strong>一个基于 llama-cpp-python 的 OpenAI 兼容 API 服务器</strong><br>
   🚀 支持多模态 (Qwen3-VL) + 纯文本模型 | 集成 Open WebUI 前端<br>
