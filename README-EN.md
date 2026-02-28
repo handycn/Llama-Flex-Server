@@ -62,17 +62,17 @@
 
 ### macOS / Linux
 ```bash
-git clone [https://github.com/handycn/Llama-Flex-Server.git](https://github.com/handycn/Llama-Flex-Server.git)
+git clone https://github.com/handycn/Llama-Flex-Server.git
 cd Llama-Flex-Server
 chmod +x start_flex.macos.command
 ./start_flex.macos.command
 ```
 
-### Windows (PowerShell)
+### Windows 
 ```powershell
-git clone [https://github.com/handycn/Llama-Flex-Server.git](https://github.com/handycn/Llama-Flex-Server.git)
+git clone https://github.com/handycn/Llama-Flex-Server.git
 cd Llama-Flex-Server
-./start_windows.bat
+start_windows.bat
 ```
 
 🎉 Once started, visit **http://localhost:8080** to start chatting!
@@ -94,7 +94,7 @@ python -m venv venv
 
 ### 2. Clone the Repository
 ```bash
-git clone [https://github.com/handycn/Llama-Flex-Server.git](https://github.com/handycn/Llama-Flex-Server.git)
+git clone https://github.com/handycn/Llama-Flex-Server.git
 cd Llama-Flex-Server
 ```
 
