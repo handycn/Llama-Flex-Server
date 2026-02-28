@@ -55,7 +55,7 @@
 ### 前置要求
 * Python 3.10+
 * Git
-* （可选）CUDA 11.7+ / Metal (Mac)
+*（可选）CUDA 11.7+ / Metal (Mac)
 
 ### macOS / Linux
 ```bash
