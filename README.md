@@ -15,7 +15,7 @@
   ✨ 核心亮点：30秒自动释放显存 + 实时性能监控，彻底告别内存泄漏！
 </p>
 <p align="center">
-  <img src="屏幕截图 2026-03-01 011030.png" alt="Demo Screenshot" width="800">
+  <img src="docs/2026-03-01 011030.png" alt="Demo Screenshot" width="800">
   <br>
   <em>（win终端性能监控）</em>
 <p align="center">
