@@ -15,7 +15,7 @@ class Filter:
         # 示例路径（根据你的系统选一个）：
         # Windows: self.memory_file = "C:\\Users\\你的用户名\\memory.txt"
         # Mac: self.memory_file = "/Users/你的用户名/memory.txt"
-        self.memory_file = "/Users/zhuyanan/Documents/llama-cpp-python/memory.md"
+        self.memory_file = "C:\\Users\\你的用户名\\memory.txt"
         
     def inlet(self, body: dict, __user__: Optional[dict] = None) -> dict:
         # 读取记忆文件
