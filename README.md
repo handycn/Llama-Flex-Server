@@ -246,4 +246,4 @@ export GOOGLE_DRIVE_API_KEY="你的api_key"
   如果您觉得有用，欢迎给个 <b>Star ⭐</b>！
 </p>
 
-[![Star History Chart](https://api.star-history.com/svg?repos=handycn/flex-server&type=Date)](https://star-history.com/#handycn/flex-server&Date)
+
