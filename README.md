@@ -55,7 +55,7 @@
 ### 前置要求
 * Python 3.10+
 * Git
-*（可选）CUDA 11.7+ / Metal (Mac)
+* (可选)CUDA 11.7+ / Metal (Mac)
 
 ### macOS / Linux
 ```bash
@@ -76,51 +76,82 @@ cd flex-server
 
 ---
 
-## 📦 完整安装与配置
+## 📦 安装与配置
 
-### 1. 克隆仓库与环境准备
+### 1. 创建虚拟环境（推荐）
 ```bash
-git clone [https://github.com/handycn/flex-server.git](https://github.com/handycn/flex-server.git)
-cd flex-server
+# macOS/Linux
 python -m venv venv
+source venv/bin/activate
 
-# 激活环境
-# macOS/Linux: source venv/bin/activate
-# Windows: .\venv\Scripts\activate
+# Windows
+python -m venv venv
+.\venv\Scripts\activate
 ```
 
-### 2. 安装后端依赖
+### 2. 克隆本仓库
 ```bash
-# 基础版本
-pip install -r requirements.txt
+git clone https://github.com/handycn/Llama-Flex-Server.git
+cd Llama-Flex-Server
+```
 
-# GPU 加速版本 (CUDA)
-pip install llama-cpp-python --extra-index-url [https://github.com/JamePeng/llama-cpp-python/releases](https://github.com/JamePeng/llama-cpp-python/releases)
+### 3. 安装 llama-cpp-python（核心引擎）
+具体的后端说明，请参阅此处：https://github.com/JamePeng/llama-cpp-python
 
-# Mac Metal 加速
+根据您的硬件选择一种方式：
+
+**选项A：CPU 版本（通用）**
+```bash
+pip install llama-cpp-python
+```
+
+**选项B：GPU 加速（NVIDIA CUDA）- 推荐**
+```bash
+pip install llama-cpp-python --extra-index-url https://github.com/JamePeng/llama-cpp-python/releases
+```
+
+**选项C：Mac Metal 加速（Apple Silicon）**
+```bash
 CMAKE_ARGS="-DGGML_METAL=on" pip install llama-cpp-python
 ```
 
-### 3. 安装前端与模型配置
+### 4. 安装 API 服务依赖
+```bash
+pip install fastapi uvicorn
+```
+
+### 5. 安装 Open WebUI（前端，可选）
+具体的前端说明，请参阅此处：https://github.com/open-webui/open-webui
+
+如果还没有安装 Open WebUI：
 ```bash
 pip install open-webui
 ```
 
-**配置 `config.json`：**
+### 6. 配置模型
+配置 `config.json`：**
 复制模板并编辑路径：
 ```json
 {
   "models": [
     {
       "name": "qwen3-vl-8b",
-      "path": "/path/to/your/Qwen3-VL-8B-Instruct-Q8_0.gguf",
-      "mmproj_path": "/path/to/your/mmproj-Qwen3-VL-8B-Instruct-F16.gguf",
+      "path": "/path/to/your/qwen3-vl-8b.Q8_0.gguf",
+      "mmproj_path": "/path/to/your/qwen3-vl-mmproj-f16.gguf",
+      "n_ctx": 4096,
+      "n_gpu_layers": -1
+    },
+    {
+      "name": "qwen3-8b",
+      "path": "/path/to/your/qwen3-8b-Q6_K.gguf",
+      "mmproj_path": null,
       "n_ctx": 4096,
       "n_gpu_layers": -1
     }
   ]
 }
 ```
+
 
 ---
 
@@ -130,6 +161,7 @@ pip install open-webui
 项目包含 `auto_memory_filter.py`，可自动从 `memory.md` 读取长期记忆并注入系统提示词。
 
 * **使用方法：** 在 Open WebUI 「工作空间」→「函数」中导入该文件，并将 `self.memory_file` 指向你的 `memory.md` 路径。
+
 
 ### 2. 多模型并发调用
 服务器支持通过 `model_lock` 实现请求排队，避免多个模型请求导致显存冲突。
@@ -177,12 +209,11 @@ pip install open-webui
 ---
 
 ## 🙏 致谢
-- [llama-cpp-python](https://github.com/abetlen/llama-cpp-python) (感谢 JamePeng 的预编译支持)
+- [llama-cpp-python](https://github.com/abetlen/llama-cpp-python) (感谢 JamePeng 的llama_cpp_python-0.3.27版本彻底解决了显存泄露问题！)
 - [Open WebUI](https://github.com/open-webui/open-webui)
 - [Qwen](https://github.com/QwenLM/Qwen)
 
 ---
-<p align="center">
   MIT License © 2025 handycn<br>
   如果您觉得有用，欢迎给个 <b>Star ⭐</b>！
 </p>
