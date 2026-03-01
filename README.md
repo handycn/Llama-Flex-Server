@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="docs/00145.png" alt="Llama-Flex-Server Banner" style="width: 100%; max-width: 1200px; height: auto; border-radius: 8px; margin-bottom: 20px;">
+</p>
 <h1 align="center">🏆 Llama-Flex-Server</h1>
 
 <p align="center">
@@ -309,7 +312,7 @@ Windows：start_windows.bat 双击运行，自动检测 Windows Terminal，支�
 在启动 PowerShell 前先执行 <code>chcp 65001</code> 将编码切换为 UTF-8。
 </details>
 
----
+<img src="docs/00143.png" alt="分割线" style="width: 100%; max-width: 1200px; height: auto; border: none; margin: 15px 0;">
 
 ## 🙏 致谢
 - [llama-cpp-python](https://github.com/abetlen/llama-cpp-python) (感谢 JamePeng 的llama_cpp_python-0.3.27版本彻底解决了显存泄露问题！)
