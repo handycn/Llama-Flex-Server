@@ -178,18 +178,27 @@ Used with `memory.md`, it achieves long-term memory across sessions.
 
 ### ☁️ Google Drive Integration
 
-If you need to use the Google Drive attachment feature in Open WebUI, configure it in the startup script:
+To use Open WebUI's Google Drive attachment feature, configure the following in your startup script:
 
 ```bash
 export ENABLE_GOOGLE_DRIVE_INTEGRATION="true"
 export GOOGLE_DRIVE_CLIENT_ID="your_client_id"
 export GOOGLE_DRIVE_API_KEY="your_api_key"
 ```
+
+#### ⚠️ Important Note for Windows Users
+Due to Windows security mechanisms, accessing via `localhost` may cause Google Drive authentication popup to fail (error: `Popup window closed`).
+
+**Solution:**
+- The startup script includes a built-in fix, forcing access via `127.0.0.1` (`HOST=127.0.0.1`, `WEBUI_URL=http://127.0.0.1:8080`)
+- Browser will automatically open `http://127.0.0.1:8080` instead of `localhost`
+- If you've previously accessed via `localhost` and saved passwords, please use `127.0.0.1` to log in again
+
 <p align="center">
-  <img src="docs/截屏2026-02-28 17.55.16.png" alt="Demo 1" width="400">
-  <img src="docs/截屏2026-02-28 17.54.42.png" alt="Demo 2" width="400">
+  <img src="docs/截屏2026-02-28 17.55.16.png" alt="Google Drive Button" width="400">
+  <img src="docs/截屏2026-02-28 17.54.42.png" alt="File Selection Interface" width="400">
   <br>
-  <em>(Screenshots: Google Drive button, document selection)</em>
+  <em>Google Drive button and file selection interface</em>
 </p>
 
 ---
