@@ -1,4 +1,4 @@
-# 🏆 Llama-Flex-Server
+<h1 align="center">🏆 Llama-Flex-Server</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10+-blue?style=flat-square" alt="Python">
