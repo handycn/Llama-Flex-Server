@@ -8,9 +8,15 @@
   <img src="https://img.shields.io/badge/license-MIT-orange?style=flat-square" alt="License">
   <a href="https://github.com/handycn/flex-server"></a>
 </p>
-<p align="center">
-  <a href="README-EN.md"><img src="https://img.shields.io/badge/English-README-blue?style=for-the-badge" alt="English"></a>
+
+<p align="center" style="margin: 20px 0; font-size: 32px; font-weight: bold;">
+  <span style="color: #ffcc00 !important;">&#9654;&#9654;&#9654;</span>
+  <a href="README-EN.md" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: white !important; text-decoration: none; font-size: 18px; font-weight: bold; border-radius: 6px; margin: 0 15px;">
+    english version
+  </a>
+  <span style="color: #ffcc00 !important;">&#9664;&#9664;&#9664;</span>
 </p>
+
 <p align="center">
   <strong>一个基于 llama-cpp-python 的 OpenAI 兼容 API 服务器</strong><br>
   🚀 支持多模态 (Qwen3-VL) + 纯文本模型 | 集成 Open WebUI 前端<br>
