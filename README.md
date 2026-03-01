@@ -194,11 +194,20 @@ export ENABLE_GOOGLE_DRIVE_INTEGRATION="true"
 export GOOGLE_DRIVE_CLIENT_ID="你的client_id"
 export GOOGLE_DRIVE_API_KEY="你的api_key"
 ```
+
+#### ⚠️ Windows 用户重要提示
+由于 Windows 安全机制限制，使用 `localhost` 访问时可能导致 Google Drive 认证弹窗无法正常关闭（报错 `Popup window closed`）。
+
+**解决方案：**
+- 启动脚本已内置修复，强制使用 `127.0.0.1` 访问（`HOST=127.0.0.1`, `WEBUI_URL=http://127.0.0.1:8080`）
+- 浏览器会自动打开 `http://127.0.0.1:8080` 而非 `localhost`
+- 如果之前通过 `localhost` 访问过并保存了密码，请改用 `127.0.0.1` 重新登录
+
 <p align="center">
-  <img src="docs/截屏2026-02-28 17.55.16.png" alt="Demo 1" width="400">
-  <img src="docs/截屏2026-02-28 17.54.42.png" alt="Demo 2" width="400">
+  <img src="docs/截屏2026-02-28 17.55.16.png" alt="Google Drive 按钮" width="400">
+  <img src="docs/截屏2026-02-28 17.54.42.png" alt="文档选择界面" width="400">
   <br>
-  <em>（截图：google dirve按钮、文档选择）</em>
+  <em>Google Drive 按钮及文档选择界面</em>
 </p>
 
 ---
