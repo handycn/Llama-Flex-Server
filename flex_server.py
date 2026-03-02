@@ -32,16 +32,23 @@ def unload_model():
     global current_model, current_model_name
     if current_model is not None:
         try:
-            print(f"\r\033[K\033[33m[系统] 已超过 {UNLOAD_DELAY}s 未使用，自动卸载模型释放内存...\033[0m")
-            current_model.close()
-        except Exception:
-            pass
-        current_model = None
-        current_model_name = None
+            print(f"\r\033[K\033[33m[系统] 模型睡觉去了...\033[0m")
+            # 1. 执行 llama-cpp 的内部清理
+            current_model.close() 
+            # 2. 显式销毁对象
+            temp_model = current_model
+            current_model = None 
+            current_model_name = None
+            del temp_model # 强制销毁局部引用
+        except Exception as e:
+            print(f"卸载异常: {e}")
+        
+    # 3. 连续执行垃圾回收
     gc.collect()
+    # 4. 给 Windows 文件系统一点点“反应时间” (可选，仅在报占用时加)
+    # time.sleep(0.1)
 
 async def schedule_unload_with_countdown():
-    """带倒计时的后台任务"""
     global unload_task
     try:
         for i in range(UNLOAD_DELAY, 0, -1):
@@ -92,29 +99,25 @@ app = FastAPI(title="Llama Flex Server")
 class ChatRequest(BaseModel):
     model: str
     messages: List[Dict[str, Any]]
-    max_tokens: Optional[int] = 2048  # 默认 2048，不再戛然而止
+    max_tokens: Optional[int] = 4096 
     temperature: Optional[float] = 0.7
     top_p: Optional[float] = 0.9
-    stream: Optional[bool] = True    # 默认开启流式
+    stream: Optional[bool] = True
 
 @app.get("/v1/models")
 async def list_models():
     return {"data": [{"id": name} for name in models_config.keys()]}
 
 async def generate_stream(request: ChatRequest):
-    """流式生成器核心逻辑"""
-    global unload_task
+    global unload_task, current_model
     
-    # 1. 确保模型已加载
     async with model_lock:
         llm = load_model(request.model)
     
+    print(f"\n[后端] 开始流式推理: {request.model}...", flush=True)
     start_time = time.time()
     completion_tokens = 0
-    prompt_tokens = 0
 
-    # 2. 调用 llama-cpp-python 的流式生成
-    # 使用 partial 在执行器中运行同步生成器，防止阻塞主线程
     loop = asyncio.get_running_loop()
     gen = functools.partial(
         llm.create_chat_completion,
@@ -130,17 +133,24 @@ async def generate_stream(request: ChatRequest):
     try:
         for chunk in response_iter:
             completion_tokens += 1
-            # 这里的 chunk 已经是 OpenAI 格式
             yield f"data: {json.dumps(chunk)}\n\n"
         
         yield "data: [DONE]\n\n"
         
-        # 3. 计算统计数据
         elapsed = time.time() - start_time
         speed = completion_tokens / elapsed if elapsed > 0 else 0
-        print(f"\n[后端] \033[34m流式推理完成 | 耗时: {elapsed:.2f}s | 生成tokens: {completion_tokens} | 速度: {speed:.2f} tokens/s\033[0m", flush=True)
+        
+        # --- 健壮性修复：处理属性可能是方法的情况 ---
+        kv_used = llm.n_tokens
+        if callable(kv_used): kv_used = kv_used()
+        
+        kv_total = llm.n_ctx
+        if callable(kv_total): kv_total = kv_total()
+        
+        kv_pct = (kv_used / kv_total) * 100 if kv_total > 0 else 0
 
-        # 4. 启动自动卸载倒计时
+        print(f"[后端] \033[34m流式推理完成 | 耗时: {elapsed:.2f}s | 生成tokens: {completion_tokens} | 速度: {speed:.2f} t/s | KV Cache: {kv_used}/{kv_total} ({kv_pct:.1f}%)\033[0m", flush=True)
+
         if unload_task:
             unload_task.cancel()
         unload_task = asyncio.create_task(schedule_unload_with_countdown())
@@ -150,8 +160,46 @@ async def generate_stream(request: ChatRequest):
 
 @app.post("/v1/chat/completions")
 async def chat_completion(request: ChatRequest):
-    # 统一返回流式响应，Open WebUI 能够很好地处理
-    return StreamingResponse(generate_stream(request), media_type="text/event-stream")
+    global unload_task
+    
+    if request.stream:
+        return StreamingResponse(generate_stream(request), media_type="text/event-stream")
+    else:
+        async with model_lock:
+            llm = load_model(request.model)
+        
+        print(f"\n[后端] 开始非流式推理: {request.model}...", flush=True)
+        start_time = time.time()
+        loop = asyncio.get_running_loop()
+        completion = await loop.run_in_executor(None, functools.partial(
+            llm.create_chat_completion,
+            messages=request.messages,
+            max_tokens=request.max_tokens,
+            temperature=request.temperature,
+            top_p=request.top_p,
+            stream=False
+        ))
+        
+        elapsed = time.time() - start_time
+        completion_tokens = completion['usage']['completion_tokens']
+        speed = completion_tokens / elapsed if elapsed > 0 else 0
+        
+        # --- 健壮性修复：处理属性可能是方法的情况 ---
+        kv_used = llm.n_tokens
+        if callable(kv_used): kv_used = kv_used()
+        
+        kv_total = llm.n_ctx
+        if callable(kv_total): kv_total = kv_total()
+        
+        kv_pct = (kv_used / kv_total) * 100 if kv_total > 0 else 0
+
+        print(f"[后端] \033[35m非流式推理完成 | 耗时: {elapsed:.2f}s | 生成tokens: {completion_tokens} | 速度: {speed:.2f} t/s | KV Cache: {kv_used}/{kv_total} ({kv_pct:.1f}%)\033[0m", flush=True)
+
+        if unload_task:
+            unload_task.cancel()
+        unload_task = asyncio.create_task(schedule_unload_with_countdown())
+        
+        return completion
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=10000, log_level="warning")
