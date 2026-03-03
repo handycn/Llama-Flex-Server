@@ -25,7 +25,7 @@
 </p>
 
 ---
-The script has been updated to support JamePeng/llama-cpp-python v0.3.30 and open-webui/open-webui v0.8.8
+✌️The script has been updated to support JamePeng/llama-cpp-python v0.3.30 and open-webui/open-webui v0.8.8✌️
 
 ## 📖 Table of Contents
 - [✨ Features](#-features)
@@ -285,7 +285,7 @@ Run <code>chcp 65001</code> in PowerShell to switch to UTF-8 before starting.
 ---
 
 ## 🙏 Credits
-- [llama-cpp-python](https://github.com/JamePeng/llama-cpp-python/v0.3.30) (Special thanks to JamePeng's 0.3.27 version for solving VRAM leaks!)
+- [llama-cpp-python](https://github.com/JamePeng/llama-cpp-python) (Special thanks to JamePeng's 0.3.27 version for solving VRAM leaks!)
 - [Open WebUI](https://github.com/open-webui/open-webui)
 - [Qwen](https://github.com/QwenLM/Qwen)
 
