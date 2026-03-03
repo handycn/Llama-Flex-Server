@@ -36,7 +36,7 @@
 </p>
 
 ---
-脚本已更新，已支持JamePeng/llama-cpp-python-v0.3.30和open-webui/open-webui-v0.8.8
+✌️脚本已更新，已支持JamePeng/llama-cpp-python-v0.3.30和open-webui/open-webui-v0.8.8✌️
 
 ## 📖 目录
 - [✨ 特性一览](#-特性一览)
