@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # --- 1. 路径配置 ---
-BACKEND_DIR="/path/llama-cpp-python"
-FRONTEND_DIR="/path/open-webui"
+BACKEND_DIR="/path/llama-cpp-python" # 请修改为你的路径
+FRONTEND_DIR="/path/open-webui" # 请修改为你的路径
 
 # --- 2. 环境变量 ---
 export ENABLE_GOOGLE_DRIVE_INTEGRATION="true"
-export GOOGLE_DRIVE_CLIENT_ID="****"
-export GOOGLE_DRIVE_API_KEY="****E"
+export GOOGLE_DRIVE_CLIENT_ID="****" # 请修改为你的google id
+export GOOGLE_DRIVE_API_KEY="****" # 请修改为你的google apikey
 export OPENAI_API_BASE_URL="http://127.0.0.1:10000/v1"
 export OLLAMA_BASE_URL=""
 export PYTHONUNBUFFERED=1
